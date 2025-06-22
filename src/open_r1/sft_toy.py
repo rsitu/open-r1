@@ -63,12 +63,12 @@ def main(script_args, training_args, model_args):
     print("\n===starting getting datasets===\n")
     dataset = get_dataset(script_args)
 
-    # tokenizer = get_tokenizer(model_args, training_args)
-    # model = get_model(model_args, training_args)
+    tokenizer = get_tokenizer(model_args, training_args)
+    model = get_model(model_args, training_args)
 
-    # if tokenizer.chat_template is None:
-    #     logger.info("No chat template provided, defaulting to ChatML.")
-    #     model, tokenizer = setup_chat_format(model, tokenizer, format="chatml")
+    if tokenizer.chat_template is None:
+        print("No chat template provided, defaulting to ChatML.")
+        model, tokenizer = setup_chat_format(model, tokenizer, format="chatml")
 
 if __name__ == "__main__":
     print("\n===starting of __main__===\n")
@@ -76,3 +76,5 @@ if __name__ == "__main__":
     parser = TrlParser((ScriptArguments, SFTConfig, ModelConfig))
     script_args, training_args, model_args = parser.parse_args_and_config()
     main(script_args, training_args, model_args)
+
+    print("\n===ending of __main__===\n")
